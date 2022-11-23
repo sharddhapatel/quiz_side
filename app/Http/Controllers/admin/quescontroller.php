@@ -20,6 +20,7 @@ class quescontroller extends Controller
         } else {
             $data = $request->all();
             $ans = DB::table('addques')->insert(["question" => $data['que'], "a" => $data['o1'], "b" => $data['o2'], "c" => $data['o3'], "ans" => $data['answer']]);
+           
             return redirect()->back()->with("message", "Insert Sucessfully...");
         }
     }

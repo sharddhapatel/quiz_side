@@ -15,7 +15,7 @@
                         <a class="quizhead" href="#" style="margin-left: 12px;">
                             <img src="images/b11.jpg" alt="">
                         </a> <span class="quizhead1">Show Result</span>
-                        <a href="{{url('index')}}" ><button type="submit" class="btn" style="background: #b5a264; border: 1px solid #b5a264;">Play Quiz</button></a>
+                        {{-- <a href="{{url('index')}}" ><button type="submit" class="btn" style="background: #b5a264; border: 1px solid #b5a264;">Play Quiz</button></a> --}}
                     </div>
                 </div>
                 <div id="scoresubmit">

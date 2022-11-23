@@ -19,10 +19,7 @@
             </div>
         </div>
         <div id="scoresubmit">
-
             <div class="row sequence">
-
-
                 <div class="col l6 s6 m6">
                     <div class="sequencehead1">
                         <!-- <img class="sequencehead01" src="images/circle.png" alt=""> -->

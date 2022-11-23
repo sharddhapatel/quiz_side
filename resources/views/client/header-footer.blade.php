@@ -113,6 +113,11 @@
 
                     </li>
                     <li style="border-bottom: solid 1px #ccc;">
+                        <a aria-expanded="false" href="{{url('playnow')}}">
+                            <i class="fa-solid fa-arrow-right"></i><span class="nav-text">Play Now</span>
+                        </a>
+                    </li>
+                    <li style="border-bottom: solid 1px #ccc;">
                         <a aria-expanded="false" href="">
                             <i class="fa-brands fa-instagram"></i><span class="nav-text">Instagram</span>
                         </a>

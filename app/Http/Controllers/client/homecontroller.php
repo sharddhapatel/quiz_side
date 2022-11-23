@@ -26,13 +26,13 @@ class homecontroller extends Controller
         $data = DB::table('addques')->inRandomOrder()->first();
         $no = $req->no;
         $no++;
-        $a = session::get('user_id');
+   
         $today = Carbon::now()->format('d');
         $date = Carbon::now();
         $monthName = $date->format('F');
         if ($no <= 2) {
             if ($req->ans != "") {
-                DB::table('test')->insert(["uid" => $req['uid'],"qid" => $req['qid'],"rightans" => $req['ans']]);
+                $test=DB::table('test')->insert(["uid" => $req['uid'],"qid" => $req['qid'],"rightans" => $req['ans']]);
             }
             return view('client.dashboard')->with(["data" => $data, "no" => $no, "today" => $today, "date" => $date, "monthName" => $monthName]);
         } else {
@@ -110,7 +110,7 @@ class homecontroller extends Controller
     //    echo"<pre>";
     //    print_r($a);
     //    die();
-        if ($no <= 25) {
+        if ($no <= 15) {
             if ($req->ans != "") {
                 DB::table('test')->insert(["uid" => $a, "qid" => $req['qid'], "rightans" => $req['ans']]);
                 $r = DB::table('addques')
@@ -120,12 +120,13 @@ class homecontroller extends Controller
                 ->get();
               
             $result=Session::put('result', count($r));
-            DB::table('test')->where('uid', Session::get('clientuser_id'))->delete();
+            // DB::table('test')->where('uid', Session::get('clientuser_id'))->delete();
             }
             // return response()->json('data', 'no');
             // return redirect('question')->with(["data" => $data, "no" => $no, "today" => $today, "date" => $date, "monthName" => $monthName]);
             return response()->view('client.question', compact('data', 'no', 'today', 'date', 'monthName','result'), 200)
-                ->header("Refresh", "5;url=/result");
+                ->header("Refresh", "90;url=/result");
+               
         }
          else {
             DB::table('test')->insert(["uid" =>$a, "qid" => $req['qid'],  "rightans" => $req['ans']]);
