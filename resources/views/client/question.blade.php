@@ -39,28 +39,28 @@
                             </svg>
                         </div>
                         <div class="controlls">
-                            <div class="display-remain-time">00</div>
+                            <div class="display-remain-time"><div id="countdown"></div></div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
 
-{{-- 
 <div id="ajaxQuestion">
 
-                <div class="col l6 s6 m6">
+                {{-- <div class="col l6 s6 m6">
                     <div class="sequencehead">
                         <span>{{$no}}</span> /<span>25</span>
                     </div>
 
-                </div>
+                </div> --}}
 
                 <!--   <div class="col l6 s4 m4">
               <div><img class="star" th:src="@{/img/star.png}" alt=""></div>
               <div class="hat">Hat-trick!</div>
               <div class="points">10 points added</div>
                 </div> -->
-                <div class="col-6 colmobile12">
+                {{-- <div class="col-6 colmobile12">
                     <div class="row  earningtabnew entrydetails" style="width: 100%;">
 
                         <div class="col-lg-12">
@@ -107,7 +107,7 @@
            
 
 
-            </div>  --}}
+            </div>  --}} 
 
 
 
@@ -129,21 +129,20 @@
                             <div class="basic-form">
                                 <form action="{{url('show')}}" method="post" enctype="multipart/form-data">
                                     {{csrf_field()}}
-                                    <p class="questionp">{{$no}}.{{$data->question}}</p>
+                                    <p class="questionp">{{$no}}.{{$data->question}} </p>
                            
-                                    <input type="hidden" id="qid" value="{{$data->id}}" name="qid" />
+                                    <input type="hidden" id="qid" value="{{$data->id}}" name="qid"  />
 
-                                    <input type="hidden" id="no" value="{{$no}}" name="no" />
+                                    <input type="hidden" id="no" value="{{$no}}" name="no"  />
 
-                                   <span class="questionspan"> A  <input type="radio" value="a" name="ans" id="ans" class="questioninput"/> {{$data->a}} <br/></span>
-                                   <span class="questionspan"> B <input type="radio" value="b" name="ans"  id="ans" class="questioninput"/> {{$data->b}} <br/></span>
-                                   <span class="questionspan"> C <input type="radio" value="c" name="ans" id="ans" class="questioninput"/> {{$data->c}} <br/></span>
+                                   <span class="questionspan"> A  <input type="radio" value="a" name="ans" id="ans" class="questioninput"required/> {{$data->a}} <br/></span>
+                                   <span class="questionspan"> B <input type="radio" value="b" name="ans"  id="ans" class="questioninput" required/> {{$data->b}} <br/></span>
+                                   <span class="questionspan"> C <input type="radio" value="c" name="ans" id="ans" class="questioninput" required/> {{$data->c}} <br/></span>
 
                                     <br>
                                     <button type="submit" class="btn" id="send_form" style="background: #b5a264; border: 1px solid #b5a264;">Next</button>
                                 </form>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -169,6 +168,18 @@
         Content body end
  ***********************************-->
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+ <script>
+    var timeleft = 90;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = "Finished";
+  } else {
+    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+  }
+  timeleft -= 1;
+}, 1000);
+ </script>
  {{-- <script>
  
  $(document).ready(function() {

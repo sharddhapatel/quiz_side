@@ -52,11 +52,11 @@
 {{csrf_field()}}
                                         <div class="form-group">
                                             <label for="">Name</label>
-                                            <input type="text" name="name" class="form-control input-default">
+                                            <input type="text" name="name" class="form-control input-default" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="">+91</label>
-                                            <input type="text" name="phoneno" class="form-control input-default">
+                                            <input type="number" name="phoneno" class="form-control input-default" required>
                                         </div>
                                    <button type="submit" class="btn" style="background: #b5a264; border: 1px solid #b5a264;">Continue</button>
 

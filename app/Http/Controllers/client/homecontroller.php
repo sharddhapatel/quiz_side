@@ -33,10 +33,12 @@ class homecontroller extends Controller
         if ($no <= 2) {
             if ($req->ans != "") {
                 $test=DB::table('test')->insert(["uid" => $req['uid'],"qid" => $req['qid'],"rightans" => $req['ans']]);
+                DB::table('test')->delete();
             }
             return view('client.dashboard')->with(["data" => $data, "no" => $no, "today" => $today, "date" => $date, "monthName" => $monthName]);
         } else {
             DB::table('test')->insert([ "uid" =>  $req['uid'],"qid" => $req['qid'], "rightans" => $req['ans']]);
+            DB::table('test')->delete();
             return redirect('index');
         }
     }
@@ -74,11 +76,11 @@ class homecontroller extends Controller
 
 
             if ($data['name'] != '') {
-
+                DB::table('test')->delete();
                 $data1=DB::table('rejestration')->insertGetId(["name" => $data['name'], "phoneno" => $data['phoneno']]);
 
                 Session::put('clientuser_id',$data1);
-                DB::table('test')->where('uid', Session::get('clientuser_id'))->delete();
+               
 
                 return redirect('question')->with(['a' => $a]);
             } else {
@@ -110,7 +112,7 @@ class homecontroller extends Controller
     //    echo"<pre>";
     //    print_r($a);
     //    die();
-        if ($no <= 15) {
+        if ($no <= 10) {
             if ($req->ans != "") {
                 DB::table('test')->insert(["uid" => $a, "qid" => $req['qid'], "rightans" => $req['ans']]);
                 $r = DB::table('addques')
@@ -120,13 +122,13 @@ class homecontroller extends Controller
                 ->get();
               
             $result=Session::put('result', count($r));
-            // DB::table('test')->where('uid', Session::get('clientuser_id'))->delete();
+            
             }
+           
             // return response()->json('data', 'no');
             // return redirect('question')->with(["data" => $data, "no" => $no, "today" => $today, "date" => $date, "monthName" => $monthName]);
             return response()->view('client.question', compact('data', 'no', 'today', 'date', 'monthName','result'), 200)
-                ->header("Refresh", "90;url=/result");
-               
+                ->header("Refresh", "20;url=/result");     
         }
          else {
             DB::table('test')->insert(["uid" =>$a, "qid" => $req['qid'],  "rightans" => $req['ans']]);
@@ -137,8 +139,7 @@ class homecontroller extends Controller
                 ->get();
                 $result=Session::put('result', count($r));
                 DB::table('test')->where('uid', Session::get('clientuser_id'))->delete();
-            return redirect('result');
-            
+            return redirect('result');  
         }
     }
     public function clientlogout()

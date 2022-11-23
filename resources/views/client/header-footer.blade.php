@@ -438,7 +438,7 @@ function timer(seconds) {
             return;
         }
         displayTimeLeft(timeLeft);
-                                                                                                                                                                                                                            }, 1000);
+      }, 1000);
 }
 
 function encryptScore(score) {
