@@ -76,7 +76,7 @@ class homecontroller extends Controller
 
 
             if ($data['name'] != '') {
-                DB::table('test')->delete();
+                // DB::table('test')->delete();
                 $data1=DB::table('rejestration')->insertGetId(["name" => $data['name'], "phoneno" => $data['phoneno']]);
 
                 Session::put('clientuser_id',$data1);
@@ -112,7 +112,7 @@ class homecontroller extends Controller
     //    echo"<pre>";
     //    print_r($a);
     //    die();
-        if ($no <= 10) {
+        if ($no <= 25) {
             if ($req->ans != "") {
                 DB::table('test')->insert(["uid" => $a, "qid" => $req['qid'], "rightans" => $req['ans']]);
                 $r = DB::table('addques')
@@ -122,13 +122,14 @@ class homecontroller extends Controller
                 ->get();
               
             $result=Session::put('result', count($r));
-            
             }
            
+
             // return response()->json('data', 'no');
             // return redirect('question')->with(["data" => $data, "no" => $no, "today" => $today, "date" => $date, "monthName" => $monthName]);
             return response()->view('client.question', compact('data', 'no', 'today', 'date', 'monthName','result'), 200)
-                ->header("Refresh", "20;url=/result");     
+                ->header("Refresh", "90;url=/result")
+                    
         }
          else {
             DB::table('test')->insert(["uid" =>$a, "qid" => $req['qid'],  "rightans" => $req['ans']]);

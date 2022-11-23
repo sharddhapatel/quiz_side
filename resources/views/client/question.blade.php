@@ -24,6 +24,7 @@
                     <div class="sequencehead1">
                         <!-- <img class="sequencehead01" src="images/circle.png" alt=""> -->
                         <div class="circle ">
+                            <div id="countdown">
                             <svg width="50" viewBox="0 0 220 220">
                                 <g transform="translate(110,110)">
                                     <circle r="100" class="e-c-base"></circle>
@@ -36,16 +37,21 @@
                                         </g>
                                     </g>
                                 </g>
+                             
                             </svg>
                         </div>
+                           
+                        </div>
                         <div class="controlls">
-                            <div class="display-remain-time"><div id="countdown"></div></div>
-                            
+                            {{-- <div class="display-remain-time"></div> --}}
+                          
                         </div>
                     </div>
                 </div>
             </div>
-
+            {{-- <div class="controlls">
+            <div id="countdown" style="color: #fff"></div>
+            </div> --}}
 <div id="ajaxQuestion">
 
                 {{-- <div class="col l6 s6 m6">
