@@ -15,11 +15,13 @@
             <div class="quizhead" style="margin-left: 12px;">
                 <a class="quizhead" href="#" style="margin-left: 12px;">
                     <img src="{{URL:: asset('client/assets/images/b11.jpg')}}" alt="">
-                </a> <span class="quizhead1">Winners on {{$today}} {{$monthName }}</span>
+                </a> <span class="quizhead1">Winners on {{$today}} {{$monthName }} </span>
             </div>
         </div>
-        <div id="scoresubmit">
-            <div class="row sequence">
+        {{-- <div id="countdown"><h5>{{ $currentDateTime }}</h5></div> --}}
+        {{-- <h5>{{ $newDateTime }}</h5> --}}
+        {{-- <div id="scoresubmit">
+             <div class="row sequence">
                 <div class="col l6 s6 m6">
                     <div class="sequencehead1">
                         <!-- <img class="sequencehead01" src="images/circle.png" alt=""> -->
@@ -41,17 +43,17 @@
                             </svg>
                         </div>
                            
-                        </div>
-                        <div class="controlls">
-                            {{-- <div class="display-remain-time"></div> --}}
-                          
-                        </div>
-                    </div>
+                        </div> --}}
+                           {{-- <div class="controlls" style="color: #fff">
+                <div class="display-remain-time" >{{ $newDateTime }}</div>
+            </div> --}}
+                    {{-- </div>
                 </div>
-            </div>
+            </div>  --}}
             {{-- <div class="controlls">
             <div id="countdown" style="color: #fff"></div>
             </div> --}}
+    
 <div id="ajaxQuestion">
 
                 {{-- <div class="col l6 s6 m6">
@@ -117,7 +119,7 @@
 
 
 
-
+            <p id='timer'></p>
 
         <div id="ajaxQuestion">
             
@@ -175,17 +177,32 @@
  ***********************************-->
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
  <script>
-    var timeleft = 90;
-var downloadTimer = setInterval(function(){
-  if(timeleft <= 0){
-    clearInterval(downloadTimer);
-    document.getElementById("countdown").innerHTML = "Finished";
-  } else {
-    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
-  }
-  timeleft -= 1;
-}, 1000);
+ const timerValue = 30; // this value is in seconds
+		    
+		    let time = localStorage.getItem('saved_timer');
+		    if(time == null) {
+		        const saved_timer = new Date().getTime() + (timerValue * 1000);
+		        localStorage.setItem('saved_timer', saved_timer);
+		        time = saved_timer;
+		    }
+		    
+		    const timerID = setInterval(() => {
+		        const now = new Date().getTime();
+		        const difference = time - now;
+		        
+		        
+		        const totalSeconds = Math.floor(difference/1000);
+		        const minutes = Math.floor(totalSeconds / 60);
+		        const seconds = totalSeconds % 60;
+		        document.querySelector("#timer").innerText = 'Time Left: ' + minutes + ':' + ((seconds < 10) ? '0' + seconds : seconds);
+		        
+		        if(totalSeconds <= 0) {
+		            clearInterval(timerID);
+		            localStorage.removeItem('saved_timer');
+		        }
+		    }, 1000);
  </script>
+
  {{-- <script>
  
  $(document).ready(function() {

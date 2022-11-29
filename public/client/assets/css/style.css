@@ -22344,3 +22344,75 @@ a.logina {
         width: 100%;
     }
 }
+
+/* second */
+.counter {
+    --duration: 0s;
+    --size: 170px;
+    --counter-thickness: 14px;
+    --outer-radius: calc(100% / 2 - 2px);
+    --radius: calc(var(--outer-radius) - var(--counter-thickness) / 2);
+    --inner-radius: calc(var(--radius) - var(--counter-thickness) / 2);
+    --stroke-dasharray: calc(2 * 3.14 * var(--radius));
+    --repetitions: 5;
+    --animation-play-state: running;
+    position: fixed;
+    top: 127px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--size);
+    height: var(--size);
+  }
+  .counter[data-animation="paused"] {
+    --animation-play-state: paused;
+  }
+  
+  .counter > span {
+    color: #fff;
+  }
+  
+  .counter > span::after {
+    content: attr(data-repetition) " ";
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7em;
+    font-family: arial;
+  }
+  
+  .counter > svg {
+    transform: rotate(-90deg);
+  }
+  .counter > svg > circle:first-child {
+    r: var(--outer-radius);
+  }
+  .counter > svg > circle:nth-child(2) {
+    r: var(--radius);
+    stroke-width: var(--counter-thickness, 8);
+  }
+  .counter > svg > circle:last-child {
+    r: var(--inner-radius);
+  }
+  
+  .circle_animation {
+    position: relative;
+    stroke-dasharray: var(
+      --stroke-dasharray
+    ); /* this value is the pixel circumference of the circle */
+    stroke-dashoffset: 0;
+    animation: tick var(--duration) linear forwards;
+    animation-iteration-count: var(--repetitions, 1);
+    animation-play-state: var(--animation-play-state);
+  }
+  
+  @keyframes tick {
+    100% {
+      stroke-dashoffset: calc(-1 * var(--stroke-dasharray));
+    }
+  }
+  
